@@ -1,0 +1,242 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/* Variables */ 
+$red: #FF7474;
+$black: #181B31;
+$violet: #EAEBF5;
+$darkerViolet: #DBDCE6;
+$white: #FFF;
+$gray: #808291;
+
+/* GLOBAL */
+*{box-sizing: border-box;}
+
+html{
+    font-size: 62.5%;
+}
+
+body{
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.6rem;
+    line-height: 1.2;
+    margin: 0;
+    color: $black;
+}
+
+img{max-width: 100%;}
+span{display: inline-block;}
+h1, h2, h3, h4, h5, h6, p, a, ul, ol{
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+}
+
+.uppercase{
+    text-transform: uppercase;
+}
+.first-maj::first-letter{
+    text-transform: uppercase;
+}
+[color=red]{
+    color: $red;
+}
+.arrow-circle{
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    font-size: 30px;
+    line-height: 0;
+    color: $gray;
+    cursor: pointer;
+
+    .arrow{
+        transition: transform 0.3s ease;
+    }
+    .arrow-up{
+        transform: rotateZ(180deg);
+    }
+}
+
+
+/* END GLOBAL*/
+
+
+// header part
+header{
+    background-color: $violet;
+    padding-bottom: 2rem;
+    
+    & > div:last-of-type{
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .header-bg{
+        height: 30vh;
+        min-height: 300px;
+        width: 100%;
+        background: url("../img/Background-Boomers.jpg") no-repeat center;
+        background-size: cover;
+    }
+
+    h1, h3{
+        width: 100%;
+        text-align: center;
+    }
+
+    h1{
+        font-size: 6rem;
+        margin: 2rem 0;
+    }
+    h3{
+        font-weight: normal;
+        padding: 0 2rem;
+    }
+}
+
+// articles container part
+main{
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 5rem;
+}
+
+// articles part
+article{
+    width: 100%;
+    border: 2px solid $darkerViolet;
+    margin: 5rem 0;
+    overflow-y: hidden;
+
+    img{
+        object-fit: cover;
+        width: 100%;
+        transform: scaleY(0);
+        transform-origin: top;
+        margin-top: -100%;
+        transition: transform 0.3s ease, 
+                    margin-top 0.4s ease;
+    }
+
+    .content{
+        padding: 2rem;
+
+        .arrow-circle{
+            float: right;
+        }
+
+        h3{
+            font-size: 3rem;
+            display: inline-block;
+            width: calc(100% - 60px); 
+            padding-bottom: 2rem;
+        }
+
+        p{
+            visibility: hidden;
+            font-size: 0;
+            transition: font-size 0.1s ease;
+        }
+    }
+
+    .art-footer{
+        background-color: $violet;
+        padding: 0.5rem 0;
+        display: flex;
+        justify-content: space-around;
+    }
+}
+
+// when an article is open
+article.art-open{
+    
+    img{
+        transform: scaleY(1);
+        margin-top: 0%;
+    }
+    
+    .content{
+        .arrow-circle > .arrow{transform: rotateZ(180deg);}
+
+        p{
+            visibility: visible;
+            font-size: 1.6rem;
+        }
+    }
+}
+
+
+// footer part
+footer{
+    background-color: $red;
+    color: white;
+    padding: 5rem;
+    text-align: center;
+    line-height: 1.1;
+}
+
+
+
+
+/* Media Queries */
+
+@media screen and (min-width: 768px){
+
+    // reponsive of the header
+    header{
+        div:last-of-type{
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+
+            h1, h3{
+                text-align: left;
+                max-width: fit-content;
+            }
+
+            padding: 0 5rem;
+        }
+    }
+
+    // responsive of all articles
+    article{
+        display: flex;
+        flex-flow: column nowrap;
+
+        .art-body{
+            transition: width 1s ease;
+        }
+
+        .content, .art-footer{
+            width: 100%;
+        }
+
+        
+        .art-footer{
+            justify-self: flex-end;
+            align-self: flex-end;
+            justify-content: flex-end;
+
+            div{
+                margin-right: 3rem;
+            }
+        }
+    }
+
+    article.art-open{
+        display: flex;
+        flex-flow: row nowrap;
+
+        .art-body{
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: space-between;
+        }
+
+        img{
+            min-width: 304px;
+            height: 100%;
+        }
+    }
+}
